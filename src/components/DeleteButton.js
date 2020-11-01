@@ -20,6 +20,12 @@ const DELETE_COMMENT = gql`
   }
 `;
 
+const DELETE_POST = gql`
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId)
+  }
+`;
+
 export default function DeleteButton({ postId, commentId, callback }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
 
@@ -74,9 +80,4 @@ export default function DeleteButton({ postId, commentId, callback }) {
   );
 }
 
-const DELETE_POST = gql`
-  mutation deletePost($postId: ID!) {
-    deletePost(postId: $postId)
-  }
-`;
 
