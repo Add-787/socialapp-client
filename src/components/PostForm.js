@@ -6,6 +6,30 @@ import { useMutation } from "@apollo/react-hooks";
 import { useForm } from "../util/hooks";
 import { FETCH_POSTS_QUERY } from "../util/graphql";
 
+const CREATE_POST = gql`
+  mutation createPost($body: String!) {
+    createPost(body: $body) {
+      id
+      body
+      createdAt
+      username
+      likes {
+        id
+        username
+        createdAt
+      }
+      likeCount
+      comments {
+        id
+        body
+        username
+        createdAt
+      }
+      commentCount
+    }
+  }
+`;
+
 export default function PostForm() {
   const { values, onChange, onSubmit } = useForm(createPostCallback, {
     body: "",
@@ -59,26 +83,4 @@ export default function PostForm() {
   );
 }
 
-const CREATE_POST = gql`
-  mutation createPost($body: String!) {
-    createPost(body: $body) {
-      id
-      body
-      createdAt
-      username
-      likes {
-        id
-        username
-        createdAt
-      }
-      likeCount
-      comments {
-        id
-        body
-        username
-        createdAt
-      }
-      commentCount
-    }
-  }
-`;
+

@@ -6,6 +6,18 @@ import gql from "graphql-tag";
 import { AuthContext } from '../context/auth'
 import { useForm } from "../util/hooks";
 
+const LOGIN_USER = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password) {
+      id
+      email
+      username
+      createdAt
+      token
+    }
+  }
+`;
+
 function Login(props) {
   const context=useContext(AuthContext);
   const [errors, setErrors] = useState({});
@@ -73,16 +85,5 @@ function Login(props) {
   );
 }
 
-const LOGIN_USER = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      email
-      username
-      createdAt
-      token
-    }
-  }
-`;
 
 export default Login;
